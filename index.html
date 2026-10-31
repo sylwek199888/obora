@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Obora — zarządzanie stadem</title>
+  <meta name="description" content="Zarządzanie stadem bydła: karty krów, ważenia, leczenie i karencja, rozród, pasze, finanse, ARiMR. Działa offline.">
+  <meta name="theme-color" content="#1f5c36">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Obora">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Motyw ustawiany przed narysowaniem strony (bez „mrugnięcia” jasnym tłem)
+    try {
+      var t = JSON.parse(localStorage.getItem('obora-theme') || '{}');
+      var dark = t.mode === 'ciemny' || ((!t.mode || t.mode === 'auto') && matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      if (t.contrast) document.documentElement.classList.add('contrast');
+      if (t.bigText) document.documentElement.classList.add('big-text');
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <div id="splash" class="splash">Ładowanie…</div>
+  <div id="app" hidden>
+    <nav id="side-nav" class="side-nav" aria-label="Menu główne"></nav>
+    <main id="main" class="main" tabindex="-1"></main>
+    <nav id="bottom-nav" class="bottom-nav" aria-label="Menu"></nav>
+  </div>
+  <noscript>Aplikacja wymaga włączonej obsługi JavaScript.</noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
