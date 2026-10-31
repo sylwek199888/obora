@@ -7,6 +7,7 @@ import * as db from './db.js';
 import { esc } from './utils.js';
 import { toast } from './ui.js';
 import { registerSettingsSection } from './views/settings.js';
+import { applyUserName } from './sync.js';
 
 export async function getFarm() { return (await db.getMeta('farm')) || {}; }
 
@@ -34,7 +35,7 @@ registerSettingsSection({
       const user = v.user.trim();
       delete v.user;
       if (user) localStorage.setItem('obora-user', user); else localStorage.removeItem('obora-user');
-      if (!db.getCurrentUser().includes('@')) db.setCurrentUser(user || 'Ja');
+      applyUserName();
       await db.setMeta('farm', v);
       toast('Zapisano dane gospodarstwa.', 'ok');
     });

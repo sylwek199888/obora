@@ -15,7 +15,7 @@ const FILES = [
   'js/views/common.js', 'js/views/dashboard.js', 'js/views/herd.js', 'js/views/cow.js', 'js/views/weights.js',
   'js/views/settings.js', 'js/views/trash.js', 'js/views/more.js', 'js/views/health.js', 'js/views/repro.js',
   'js/views/feed.js', 'js/views/finance.js', 'js/views/arimr.js', 'js/views/calendar.js', 'js/views/stats.js',
-  'js/views/print.js', 'js/views/search-tools.js', 'js/views/sync-view.js',
+  'js/views/print.js', 'js/views/search-tools.js', 'js/views/sync-view.js', 'js/config.js',
 ];
 
 self.addEventListener('install', e => {

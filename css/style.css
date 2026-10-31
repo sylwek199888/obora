@@ -462,3 +462,12 @@ details > summary { cursor: pointer; min-height: 44px; display: flex; align-item
 /* Widoki wydruku: bez menu także na ekranie */
 .print-route .side-nav, .print-route .bottom-nav { display: none !important; }
 .print-route #app { display: block; }
+
+/* Znaczek synchronizacji (telefon) */
+.sync-dot {
+  position: fixed; bottom: calc(72px + env(safe-area-inset-bottom)); right: 8px; z-index: 60; padding: 4px 8px; border-radius: 99px;
+  background: var(--surface); border: 1px solid var(--border); text-decoration: none; font-size: .85em; box-shadow: var(--shadow);
+}
+.sync-dot.sync-bad { border-color: var(--danger); background: var(--danger-soft); }
+.sync-status { text-decoration: none; display: block; }
+@media (min-width: 900px) { .sync-dot { display: none; } }

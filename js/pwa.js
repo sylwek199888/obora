@@ -13,6 +13,7 @@ export function registerSW() {
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvent = e; });
   window.addEventListener('appinstalled', () => { installEvent = null; toast('Aplikacja zainstalowana. 👍', 'ok'); });
   navigator.serviceWorker.register('sw.js').then(reg => {
+    if (!reg) return;
     // nowa wersja aplikacji pobrana w tle
     reg.addEventListener('updatefound', () => {
       const w = reg.installing;

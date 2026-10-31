@@ -29,6 +29,9 @@ import { startNotifier } from './notify.js';
 import './views/search-tools.js';
 import { qrLabelsView, cowPrintView } from './views/print.js';
 import { statsView } from './views/stats.js';
+// Etap 5: synchronizacja przez Supabase, wielu użytkowników
+import * as sync from './sync.js';
+import { syncView, statusBadge, setRecoveryMode } from './views/sync-view.js';
 
 window.APP_VERSION = '1.0.0';
 
@@ -45,6 +48,7 @@ export const NAV = [
   { path: '/finanse', icon: '💰', label: 'Finanse' },
   { path: '/arimr', icon: '📋', label: 'Zgłoszenia ARiMR' },
   { path: '/statystyki', icon: '📊', label: 'Statystyki' },
+  { path: '/synchronizacja', icon: '☁️', label: 'Synchronizacja' },
   { path: '/ustawienia', icon: '⚙️', label: 'Ustawienia' },
 ];
 
@@ -56,7 +60,7 @@ function renderNav() {
   document.getElementById('side-nav').innerHTML = `
     <div class="brand"><img src="icons/icon.svg" alt="" width="36" height="36"><span>Obora</span></div>
     ${NAV.map(item).join('')}
-    <div id="sync-status-side" class="sync-status"></div>`;
+    <a href="#/synchronizacja" id="sync-status-side" class="sync-status">${esc(statusBadge())}</a>`;
   const mobile = NAV.filter(n => n.mobile);
   const moreActive = !mobile.some(n => isActive(n.path));
   document.getElementById('bottom-nav').innerHTML = mobile.map(item).join('') +
@@ -79,6 +83,7 @@ function registerRoutes() {
   route('/statystyki', statsView, { name: 'statystyki' });
   route('/druk/krowa/:id', cowPrintView, { name: 'druk', print: true });
   route('/druk/qr', qrLabelsView, { name: 'druk', print: true });
+  route('/synchronizacja', syncView, { name: 'synchronizacja' });
 }
 
 async function start() {
@@ -92,6 +97,9 @@ async function start() {
   }
   const name = localStorage.getItem('obora-user');
   if (name) db.setCurrentUser(name);
+  // link z e-maila Supabase (potwierdzenie konta / reset hasła)
+  const authType = await sync.captureAuthRedirect();
+  if (authType === 'recovery') setRecoveryMode(true);
   await seedIfEmpty();
   await db.purgeOldTrash();
   registerRoutes();
@@ -117,6 +125,17 @@ async function start() {
   document.getElementById('splash')?.remove();
   registerSW();
   startNotifier();
+  // znaczek stanu synchronizacji (menu boczne + mały znaczek na telefonie)
+  sync.onStatus(st => {
+    const side = document.getElementById('sync-status-side');
+    if (side) side.textContent = statusBadge(st);
+    const dot = document.getElementById('sync-dot');
+    dot.hidden = !sync.isActiveSync();
+    dot.textContent = { idle: '☁️✓', syncing: '🔄', error: '⚠️', offline: '📴' }[st.state] || '☁️';
+    dot.title = statusBadge(st);
+    dot.classList.toggle('sync-bad', st.state === 'error');
+  });
+  sync.startSync();
 }
 
 start();
