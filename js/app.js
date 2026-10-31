@@ -14,6 +14,10 @@ import { cowView } from './views/cow.js';
 import { settingsView } from './views/settings.js';
 import { trashView } from './views/trash.js';
 import { moreView } from './views/more.js';
+// Etap 2: leczenie i karencja, rozród
+import './farm.js';
+import { bookView } from './views/health.js';
+import './views/repro.js';
 
 window.APP_VERSION = '1.0.0';
 
@@ -24,6 +28,7 @@ window.APP_VERSION = '1.0.0';
 export const NAV = [
   { path: '/', icon: '🏠', label: 'Pulpit', mobile: true },
   { path: '/stado', icon: '🐄', label: 'Stado', mobile: true },
+  { path: '/leczenie', icon: '💊', label: 'Księga leczenia' },
   { path: '/ustawienia', icon: '⚙️', label: 'Ustawienia' },
 ];
 
@@ -50,6 +55,7 @@ function registerRoutes() {
   route('/ustawienia', settingsView, { name: 'ustawienia' });
   route('/kosz', trashView, { name: 'kosz' });
   route('/wiecej', moreView, { name: 'wiecej' });
+  route('/leczenie', bookView, { name: 'leczenie' });
 }
 
 async function start() {

@@ -19,7 +19,7 @@ import { weightsTab, handleWeightAction, weightDialog } from './weights.js';
 /* ---------------- REJESTR ZAKŁADEK ---------------- */
 
 const tabs = [];
-/** tab = {id, label, order, render(cow,d) -> html, handle(act,id,cow,d,el) -> bool} */
+/** tab = {id, label, order, render(cow,d) -> html, handle(act,id,cow,d,el,button) -> bool} */
 export function registerCowTab(tab) { tabs.push(tab); tabs.sort((a, b) => a.order - b.order); }
 /** Dodatkowe szybkie akcje na „Przeglądzie”: {act, label, order, show(cow), run(cow,d)} */
 const quickActions = [];
@@ -323,7 +323,7 @@ export async function cowView(el, { id }, query) {
     }
     if (act.startsWith('qa-')) { const a = quickActions.find(x => 'qa-' + x.act === act); if (a) await a.run(cow, dd); return; }
     if (act.startsWith('hb-')) { const a = cowHeadButtons.find(x => 'hb-' + x.act === act); if (a) await a.run(cow, dd); return; }
-    for (const t of tabs) if (t.handle && await t.handle(act, rid, cow, dd, el)) return;
+    for (const t of tabs) if (t.handle && await t.handle(act, rid, cow, dd, el, b)) return;
   });
   el.addEventListener('submit', async e => {
     const f = e.target.closest('[data-form="kin"]');

@@ -277,7 +277,7 @@ export function formDialog({ title, fields, values = {}, submitText = 'Zapisz', 
         saved = v;
         close();
       } catch (e) {
-        console.error(e);
+        console.warn(e);
         toast(e.message || 'Nie udało się zapisać.', 'error');
         btn.disabled = false;
       }

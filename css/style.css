@@ -215,7 +215,7 @@ img { max-width: 100%; }
   .modal-wide { width: min(860px, 94vw); }
   .modal-foot .btn { flex: 0 0 auto; }
 }
-.confirm-text { font-size: 1.05em; }
+.confirm-text { font-size: 1.05em; white-space: pre-wrap; }
 
 /* ---------------- FORMULARZE ---------------- */
 .form { display: grid; gap: 4px 16px; }
