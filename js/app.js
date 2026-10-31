@@ -23,6 +23,12 @@ import { feedView } from './views/feed.js';
 import { financeView } from './views/finance.js';
 import { arimrView } from './views/arimr.js';
 import { calendarView } from './views/calendar.js';
+// Etap 4: PWA, skanowanie, QR, powiadomienia, statystyki
+import { registerSW } from './pwa.js';
+import { startNotifier } from './notify.js';
+import './views/search-tools.js';
+import { qrLabelsView, cowPrintView } from './views/print.js';
+import { statsView } from './views/stats.js';
 
 window.APP_VERSION = '1.0.0';
 
@@ -38,6 +44,7 @@ export const NAV = [
   { path: '/pasze', icon: '🌾', label: 'Pasza i magazyn' },
   { path: '/finanse', icon: '💰', label: 'Finanse' },
   { path: '/arimr', icon: '📋', label: 'Zgłoszenia ARiMR' },
+  { path: '/statystyki', icon: '📊', label: 'Statystyki' },
   { path: '/ustawienia', icon: '⚙️', label: 'Ustawienia' },
 ];
 
@@ -69,6 +76,9 @@ function registerRoutes() {
   route('/finanse', financeView, { name: 'finanse' });
   route('/arimr', arimrView, { name: 'arimr' });
   route('/kalendarz', calendarView, { name: 'kalendarz' });
+  route('/statystyki', statsView, { name: 'statystyki' });
+  route('/druk/krowa/:id', cowPrintView, { name: 'druk', print: true });
+  route('/druk/qr', qrLabelsView, { name: 'druk', print: true });
 }
 
 async function start() {
@@ -105,6 +115,8 @@ async function start() {
   renderNav();
   document.getElementById('app').hidden = false;
   document.getElementById('splash')?.remove();
+  registerSW();
+  startNotifier();
 }
 
 start();

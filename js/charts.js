@@ -27,7 +27,7 @@ function niceTicks(min, max, count = 5) {
  * opts: {height, unit, target:{y,label}, decimals}
  */
 export function lineChart(series, opts = {}) {
-  const H = opts.height || 260, pad = { l: 56, r: 16, t: 16, b: 40 };
+  const H = opts.height || 280, pad = { l: 70, r: 16, t: 20, b: 44 };
   const all = series.flatMap(s => s.points);
   if (!all.length) return '<p class="muted">Brak danych do wykresu.</p>';
   const xs = all.map(p => parseISO(p.x).getTime());
@@ -76,7 +76,7 @@ export function lineChart(series, opts = {}) {
  * labels: ['sty 2026', ...], series: [{label, values:[...]}]
  */
 export function barChart(labels, series, opts = {}) {
-  const H = opts.height || 260, pad = { l: 64, r: 12, t: 16, b: 48 };
+  const H = opts.height || 280, pad = { l: 76, r: 12, t: 20, b: 48 };
   const vals = series.flatMap(s => s.values).filter(v => isFinite(v));
   if (!vals.length || vals.every(v => !v)) return '<p class="muted">Brak danych do wykresu.</p>';
   const ticks = niceTicks(Math.min(0, ...vals), Math.max(0, ...vals));
@@ -98,7 +98,7 @@ export function barChart(labels, series, opts = {}) {
       g += `<rect class="bar s${j + 1} ${v < 0 ? 'neg' : ''}" x="${x.toFixed(1)}" y="${ya.toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${Math.max(0, yb - ya).toFixed(1)}" rx="2">
         <title>${esc(lab)} — ${esc(s.label)}: ${fmtNum(v, opts.decimals ?? 0)} ${esc(opts.unit || '')}</title></rect>`;
     });
-    const every = Math.ceil(labels.length / 8);
+    const every = Math.ceil(labels.length / 6);
     if (i % every === 0) g += `<text class="axis" x="${cx}" y="${H - pad.b + 18}" text-anchor="middle">${esc(lab)}</text>`;
   });
   const legend = series.length > 1 ? legendHTML(series.map(s => s.label)) : '';

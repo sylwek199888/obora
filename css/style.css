@@ -376,7 +376,7 @@ details > summary { cursor: pointer; min-height: 44px; display: flex; align-item
 .chart svg { width: 100%; height: auto; display: block; }
 .chart .grid { stroke: var(--grid); stroke-width: 1; }
 .chart .grid.zero { stroke: var(--muted); }
-.chart .axis { fill: var(--muted); font-size: 13px; font-family: var(--font); }
+.chart .axis { fill: var(--muted); font-size: 17px; font-family: var(--font); }
 .chart .line { fill: none; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
 .chart .dot { stroke: var(--surface); stroke-width: 2; }
 .chart .target { stroke: var(--danger); stroke-dasharray: 6 5; stroke-width: 2; }
@@ -458,3 +458,7 @@ details > summary { cursor: pointer; min-height: 44px; display: flex; align-item
   .flag-withdrawal { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   @page { margin: 12mm; }
 }
+
+/* Widoki wydruku: bez menu także na ekranie */
+.print-route .side-nav, .print-route .bottom-nav { display: none !important; }
+.print-route #app { display: block; }

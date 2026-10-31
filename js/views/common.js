@@ -6,7 +6,7 @@ import { esc, ageText, fmtKg, fmtDate, todayISO, daysBetween } from '../utils.js
 import { weightStats, activeWithdrawal, reproInfo, isActive, tagLast4, WEIGH_REMINDER_DAYS, STATUS_LABEL } from '../model.js';
 
 /** Ikona zwierzęcia, gdy nie ma zdjęcia. */
-export const COW_ICON = `<svg viewBox="0 0 64 64" aria-hidden="true" class="cow-icon"><path fill="currentColor" d="M14 14c-5 0-9 3-10 7 3 1 6 1 9 0l2 3c-1 2-2 5-2 8 0 9 6 18 19 18s19-9 19-18c0-3-1-6-2-8l2-3c3 1 6 1 9 0-1-4-5-7-10-7-2 0-4 1-5 2-4-2-8-3-13-3s-9 1-13 3c-1-1-3-2-5-2zm8 14a3 3 0 110 6 3 3 0 010-6zm20 0a3 3 0 110 6 3 3 0 010-6zM24 42h16c2 0 4 2 4 4s-2 4-4 4H24c-2 0-4-2-4-4s2-4 4-4zm2 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm12 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>`;
+export const COW_ICON = `<svg viewBox="0 0 64 64" aria-hidden="true" class="cow-icon"><path fill="currentColor" opacity=".6" d="M19 15C15 10 16 5 21 2c-1 4 0 8 4 11zM45 15c4-5 3-10-2-13 1 4 0 8-4 11z"/><path fill="currentColor" d="M14 14c-5 0-9 3-10 7 3 1 6 1 9 0l2 3c-1 2-2 5-2 8 0 9 6 18 19 18s19-9 19-18c0-3-1-6-2-8l2-3c3 1 6 1 9 0-1-4-5-7-10-7-2 0-4 1-5 2-4-2-8-3-13-3s-9 1-13 3c-1-1-3-2-5-2zm8 14a3 3 0 110 6 3 3 0 010-6zm20 0a3 3 0 110 6 3 3 0 010-6zM24 42h16c2 0 4 2 4 4s-2 4-4 4H24c-2 0-4-2-4-4s2-4 4-4zm2 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm12 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>`;
 
 /**
  * Alerty zwierzęcia (karencja, spadek wagi, brak ważenia, wycielenie...).
