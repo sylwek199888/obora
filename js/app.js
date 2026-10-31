@@ -18,6 +18,11 @@ import { moreView } from './views/more.js';
 import './farm.js';
 import { bookView } from './views/health.js';
 import './views/repro.js';
+// Etap 3: pasza, finanse, ARiMR, kalendarz
+import { feedView } from './views/feed.js';
+import { financeView } from './views/finance.js';
+import { arimrView } from './views/arimr.js';
+import { calendarView } from './views/calendar.js';
 
 window.APP_VERSION = '1.0.0';
 
@@ -28,7 +33,11 @@ window.APP_VERSION = '1.0.0';
 export const NAV = [
   { path: '/', icon: '🏠', label: 'Pulpit', mobile: true },
   { path: '/stado', icon: '🐄', label: 'Stado', mobile: true },
+  { path: '/kalendarz', icon: '📅', label: 'Kalendarz', mobile: true },
   { path: '/leczenie', icon: '💊', label: 'Księga leczenia' },
+  { path: '/pasze', icon: '🌾', label: 'Pasza i magazyn' },
+  { path: '/finanse', icon: '💰', label: 'Finanse' },
+  { path: '/arimr', icon: '📋', label: 'Zgłoszenia ARiMR' },
   { path: '/ustawienia', icon: '⚙️', label: 'Ustawienia' },
 ];
 
@@ -56,6 +65,10 @@ function registerRoutes() {
   route('/kosz', trashView, { name: 'kosz' });
   route('/wiecej', moreView, { name: 'wiecej' });
   route('/leczenie', bookView, { name: 'leczenie' });
+  route('/pasze', feedView, { name: 'pasze' });
+  route('/finanse', financeView, { name: 'finanse' });
+  route('/arimr', arimrView, { name: 'arimr' });
+  route('/kalendarz', calendarView, { name: 'kalendarz' });
 }
 
 async function start() {
